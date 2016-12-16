@@ -7,10 +7,12 @@ class CrabbyGameWindow(arcade.Window):
 		super().__init__(width, height)
  
 		arcade.set_background_color(arcade.color.BISQUE)
-		
+		self.basket = arcade.Sprite('images/basket.png')
+		self.basket.set_position(100, 100)
   
 	def on_draw(self):
 		arcade.start_render()
+		self.basket.draw()
 		
 
  
