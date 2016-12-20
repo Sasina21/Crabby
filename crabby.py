@@ -1,5 +1,6 @@
 import arcade
 from models import Basket, World
+
 SCREEN_WIDTH = 600
 SCREEN_HEIGHT = 600
 
@@ -30,6 +31,7 @@ class CrabbyGameWindow(arcade.Window):
 	def on_draw(self):
 		arcade.start_render()
 		self.basket_sprite.draw()
+		arcade.draw_text(str(self.world.score),self.width - 30, self.height - 30,arcade.color.BURNT_SIENNA, 20)
 		
 	def animate(self, delta):
 		self.world.animate(delta)

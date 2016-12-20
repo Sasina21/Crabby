@@ -1,5 +1,16 @@
 import arcade.key
-class Basket:
+from random import randint
+
+class Model:
+	def __init__(self, world, x, y, angle):
+		self.world = world
+		self.x = x
+		self.y = y
+		self.angle = 0
+	def hit(self, other, hit_size):
+		return (abs(self.x - other.x) <= hit_size) and (abs(self.y - other.y) <= hit_size)
+
+class Basket(Model):
 
 	DIR_UP = 0
 	DIR_DOWN = 1
@@ -40,6 +51,8 @@ class World:
 		self.height = height
  
 		self.basket = Basket(self, 100, 100)
+
+		self.score = 0
  
  
 	def animate(self, delta):
