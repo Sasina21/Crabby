@@ -27,18 +27,26 @@ class CrabbyGameWindow(arcade.Window):
 		self.world = World(width, height)
 		self.basket_sprite = ModelSprite('images/basket.png',model=self.world.basket)
 
+		self.monster_sprites = []
+		for monster in self.world.monsters:
+			self.monster_sprites.append(ModelSprite('images/monster.png',model=monster))
+
 		self.crab_sprites = []
 		for crab in self.world.crabs:
-			self.crab_sprites.append(ModelSprite('images/crab3.png',model=crab))
+			self.crab_sprites.append(ModelSprite('images/crab2.png',model=crab))
 		
   
 	def on_draw(self):
 		arcade.start_render()
 		self.basket_sprite.draw()
 
+		for sprite in self.monster_sprites:
+			sprite.draw()
+
 		for sprite in self.crab_sprites:
 			sprite.draw()
-		arcade.draw_text(str(self.world.score),self.width - 30, self.height - 30,arcade.color.BURNT_SIENNA, 20)
+
+		arcade.draw_text(str(self.world.score),self.width - 60, self.height - 30,arcade.color.BURNT_SIENNA, 20)
 		
 	def animate(self, delta):
 		self.world.animate(delta)

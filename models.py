@@ -7,8 +7,10 @@ class Model:
 		self.x = x
 		self.y = y
 		self.angle = 0
+
 	def hit(self, other, hit_size):
 		return (abs(self.x - other.x) <= hit_size) and (abs(self.y - other.y) <= hit_size)
+
 	def random_location(self):
 		self.x = randint(0, self.world.width - 1)
 		self.y = randint(0, self.world.height - 1)
@@ -23,6 +25,27 @@ class Crab(Model):
 	def random_direction(self):
 		self.vx = 5 * random()
 		self.vy = 5 * random()
+
+	def animate(self, delta):
+		if (self.x < 0) or (self.x > self.world.width):
+			self.vx = - self.vx
+       
+		if (self.y < 0) or (self.y > self.world.height):
+			self.vy = - self.vy
+       
+		self.x += self.vx
+		self.y += self.vy
+
+class Monster(Model):
+	def __init__(self, world, x, y, vx, vy):
+		super().__init__(world, x, y)
+		self.vx = vx
+		self.vy = vy
+		
+
+	def random_direction(self):
+		self.vx = 7 * random()
+		self.vy = 7 * random()
 
 	def animate(self, delta):
 		if (self.x < 0) or (self.x > self.world.width):
@@ -70,6 +93,7 @@ class Basket(Model):
 			self.x += 5
 			
 class World:
+	NUM_MONSTER = 2
 	NUM_CRAB = 5
 	
 	def __init__(self, width, height):
@@ -84,15 +108,30 @@ class World:
 			crab.random_direction()
 			self.crabs.append(crab)
 
+		self.monsters = []
+		for i in range(World.NUM_MONSTER):
+			monster = Monster(self, 0, 0, 0, 0)
+			monster.random_direction()
+			self.monsters.append(monster)
+
 		self.score = 0
  
  
 	def animate(self, delta):
 		self.basket.animate(delta) 
+
+		for monster in self.monsters:
+			monster.animate(delta)
+			if self.basket.hit(monster, 70):
+				self.score -= 3
+				monster.x = 0
+				monster.y = 0
+				monster.random_direction()
+
 		for crab in self.crabs:
 			crab.animate(delta)
-			if self.basket.hit(crab, 25):
-				self.score += 1
+			if self.basket.hit(crab, 50):
+				self.score += 2
 				crab.x = 0
 				crab.y = 0
 				crab.random_direction()
