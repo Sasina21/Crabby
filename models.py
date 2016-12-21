@@ -48,11 +48,16 @@ class Monster(Model):
 		self.vy = 7 * random()
 
 	def animate(self, delta):
+		global flip
+
 		if (self.x < 0) or (self.x > self.world.width):
 			self.vx = - self.vx
+			flip = 1
        
 		if (self.y < 0) or (self.y > self.world.height):
 			self.vy = - self.vy
+			flip = 0
+
        
 		self.x += self.vx
 		self.y += self.vy
@@ -73,6 +78,7 @@ class Basket(Model):
 
 
 	def animate(self, delta):
+		self.angle = 0
 		if self.direction == Basket.DIR_UP:
 			if self.y > self.world.height:
 				self.y = 0
@@ -115,11 +121,14 @@ class World:
 			self.monsters.append(monster)
 
 		self.score = 0
+		self.time = 30
  
  
 	def animate(self, delta):
 		self.basket.animate(delta) 
 
+		self.time -=delta
+		
 		for monster in self.monsters:
 			monster.animate(delta)
 			if self.basket.hit(monster, 70):
