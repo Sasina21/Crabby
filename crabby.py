@@ -39,7 +39,7 @@ class CrabbyGameWindow(arcade.Window):
 	
 	def draw_game_over(self):
         
-        	arcade.draw_text("Game Over", 90, 295, arcade.color.BRICK_RED, 54)
+        	arcade.draw_text("TIME'S UP", 90, 295, arcade.color.BRICK_RED, 54)
 		
 
 	def on_draw(self):
