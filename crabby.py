@@ -37,9 +37,17 @@ class CrabbyGameWindow(arcade.Window):
 		for crab in self.world.crabs:
 			self.crab_sprites.append(ModelSprite('images/crab2.png',model=crab))
 	
+	def draw_game_over(self):
+        
+        	arcade.draw_text("Game Over", 90, 295, arcade.color.BRICK_RED, 54)
 		
-	def on_draw(self):
 
+	def on_draw(self):
+		if (self.world.time < 0) :
+
+			self.draw_game_over()
+
+		else:
 			arcade.start_render()
 		
 			self.basket_sprite.draw()
