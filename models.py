@@ -48,15 +48,15 @@ class Monster(Model):
 		self.vy = 7 * random()
 
 	def animate(self, delta):
-		global flip
+		
 
 		if (self.x < 0) or (self.x > self.world.width):
 			self.vx = - self.vx
-			flip = 1
+			
        
 		if (self.y < 0) or (self.y > self.world.height):
 			self.vy = - self.vy
-			flip = 0
+	
 
        
 		self.x += self.vx
