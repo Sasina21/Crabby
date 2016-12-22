@@ -39,7 +39,7 @@ class CrabbyGameWindow(arcade.Window):
 	
 	def draw_game_over(self):
         
-        	arcade.draw_text("TIME'S UP", 90, 295, arcade.color.BRICK_RED, 54)
+        	arcade.draw_text("TIME'S UP", 120, 295, arcade.color.BRICK_RED, 54)
 		
 
 	def on_draw(self):
@@ -58,7 +58,7 @@ class CrabbyGameWindow(arcade.Window):
 			for sprite in self.crab_sprites:
 				sprite.draw()
 
-			arcade.draw_text(str(self.world.score),self.width - 60, self.height - 30,arcade.color.BURNT_SIENNA, 20)
+			arcade.draw_text(str(self.world.score),self.width - 60, self.height - 30,arcade.color.BRICK_RED, 20)
 
 			arcade.draw_text(str(self.world.time),self.width - 55, self.height - 70,arcade.color.BRICK_RED, 20)
 
